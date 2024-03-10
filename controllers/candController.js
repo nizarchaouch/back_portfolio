@@ -112,11 +112,11 @@ const getCand = async (req, res) => {
 
 const logout = (req, res) => {
   try {
-    res.cookie("jwt", "", { maxAge: 0 });
-    res.status(200).json({ message: "logout success" });
+    res.clearCookie("jwt", { path: "/" });
+    res.status(200).json({ message: "Déconnexion réussie" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+    res.status(500).json({ message: "Erreur interne du serveur" });
   }
 };
 
