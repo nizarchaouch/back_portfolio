@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const candSchema = new mongoose.Schema({
+  imageUrl: {
+    type: String,
+    require: true,
+  },
   nom: {
     type: String,
     require: true,
