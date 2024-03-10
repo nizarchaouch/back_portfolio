@@ -12,15 +12,13 @@ const signup = async (req, res) => {
   let existingcand;
 
   try {
-    existingcand = await candModel.findOne({ mail: req.body.mail });
+    existingcand = await candModel.findOne({ mail: data.mail });
   } catch (err) {
     console.log(err);
   }
 
   if (existingcand) {
-    return res
-      .status(400)
-      .json({ message: "candidat alraedy exists! Login Instead" });
+    return res.status(400).json({ error: "CandidatExisteDeja" });
   }
 
   try {
@@ -41,16 +39,13 @@ const signup = async (req, res) => {
 
     await candidat.save();
 
-    // Exclure la propriété "password" de la réponse JSON
-    const candidatWithoutPassword = candidat.toJSON();
-    delete candidatWithoutPassword.password;
-
-    return res.status(201).json({ message: candidatWithoutPassword });
+    return res.status(201).json({ message: "Inscription réussie" });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({ message: ERROR_MESSAGES.UNABLE_TO_ADD });
+    return res.status(500).json({ error: ERROR_MESSAGES.UNABLE_TO_ADD });
   }
 };
+
 
 const login = async (req, res) => {
   const data = req.body;
