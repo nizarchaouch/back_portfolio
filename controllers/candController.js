@@ -46,7 +46,6 @@ const signup = async (req, res) => {
   }
 };
 
-
 const login = async (req, res) => {
   const data = req.body;
   try {

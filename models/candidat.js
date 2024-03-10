@@ -34,6 +34,10 @@ const candSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  role: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("candidat", candSchema);
