@@ -34,7 +34,7 @@ const candSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  role: {
+  verifier: {
     type: Boolean,
     default: false,
   },
