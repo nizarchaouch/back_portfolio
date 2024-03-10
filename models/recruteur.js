@@ -56,4 +56,4 @@ const candSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("candidat", candSchema);
+module.exports = mongoose.model("recruteur", candSchema);
