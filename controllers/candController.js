@@ -49,7 +49,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   const data = req.body;
   try {
-    const candidat = await candModel.findOne({ email: data.email });
+    const candidat = await candModel.findOne({ mail: data.email });
 
     if (!candidat) {
       return res
