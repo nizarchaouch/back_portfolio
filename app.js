@@ -34,7 +34,8 @@ const database = (module.exports = () => {
 
 database();
 
-app.use("/api", candRouter);
+app.use("/api/candidat", candRouter);
+app.use("/api/recruteur", recruRouter);
 
 app.listen(8000, () => {
   console.log("server on port 8000");
