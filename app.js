@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const candRouter = require("./routes/candidat");
+const recruRouter = require("./routes/recruteurR");
 
 app.use(
   cors({
