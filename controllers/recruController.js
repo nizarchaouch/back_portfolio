@@ -53,7 +53,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   const data = req.body;
   try {
-    const recruteur = await recruModel.findOne({ mail: data.email });
+    const recruteur = await recruModel.findOne({ mail: data.mail });
 
     if (!recruteur) {
       return res
