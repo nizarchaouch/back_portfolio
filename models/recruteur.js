@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const candSchema = new mongoose.Schema({
+const RecrSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
     require: true,
@@ -60,4 +60,4 @@ const candSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("recruteur", candSchema);
+module.exports = mongoose.model("recruteur", RecrSchema);
