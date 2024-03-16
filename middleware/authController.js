@@ -54,10 +54,10 @@ const getUser = async (model, req, res) => {
       return res.status(401).json({ message: "User not found" });
     }
 
-    const userWithoutPassword = user.toJSON();
-    delete userWithoutPassword.password;
+    // const userWithoutPassword = user.toJSON();
+    // delete userWithoutPassword.password;
 
-    res.send(userWithoutPassword);
+    res.send(user.toJSON());
   } catch (error) {
     console.error(error);
     return res

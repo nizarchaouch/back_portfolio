@@ -60,4 +60,19 @@ const logout = (req, res) => {
   return authController.logout(res);
 };
 
-module.exports = { signup, login, getCand, logout };
+const updateCand = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updateCand = await candModel.findByIdAndUpdate(id, req.body);
+    if (!updateCand) {
+      return res
+        .status(404)
+        .json({ message: ERROR_MESSAGES.CANDIDAT_NOT_FOUND });
+    }
+    res.status(201).json({ message: "CandidatUpdate" });
+  } catch (error) {
+    res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+  }
+};
+
+module.exports = { signup, login, getCand, logout, updateCand };
