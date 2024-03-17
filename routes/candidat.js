@@ -8,6 +8,6 @@ router.post("/logout", candContoller.logout);
 
 router.put("/update/:id", candContoller.updateCand);
 
-router.get("/user", candContoller.getCand);
+router.get("/", candContoller.getCand);
 
 module.exports = router;

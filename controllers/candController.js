@@ -1,7 +1,6 @@
 const authController = require("../middleware/authController");
-const candModel = require("../models/candidat");
+const candModel = require("../models/user");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
@@ -49,11 +48,11 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   const data = req.body;
-  return authController.authenticate(candModel, data, "Candidat", res);
+  return authController.authenticate( data, "Candidat", res);
 };
 
 const getCand = async (req, res) => {
-  return authController.getUser(candModel, req, res);
+  return authController.getUser( req, res);
 };
 
 const logout = (req, res) => {

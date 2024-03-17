@@ -1,11 +1,12 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const model = require("../models/user");
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
 };
 
-const authenticate = async (model, data, role, res) => {
+const authenticate = async (data, role, res) => {
   try {
     const user = await model.findOne({ mail: data.mail });
 
@@ -37,7 +38,7 @@ const authenticate = async (model, data, role, res) => {
   }
 };
 
-const getUser = async (model, req, res) => {
+const getUser = async (req, res) => {
   try {
     const secretKey = process.env.JWT_SECRET || "nizartoken";
 

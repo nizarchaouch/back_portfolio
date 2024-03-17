@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const candSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
     require: true,
@@ -42,6 +42,31 @@ const candSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  role:{
+    type:String,
+    default:"candidat",
+  },
+  urlfacebook: { type: String },
+  urltwitter: { type: String },
+  urlgithub: { type: String },
+  urllinkedin: { type: String },
+  // recruteur
+  nomEntreprise: {
+    type: String,
+    require: true,
+  },
+  description: {
+    type: String,
+    require: true,
+  },
+  identifiant: {
+    type: String,
+    require: true,
+  },
+  secteur: {
+    type: String,
+    require: true,
+  },
 });
 
-module.exports = mongoose.model("candidat", candSchema);
+module.exports = mongoose.model("user", userSchema);

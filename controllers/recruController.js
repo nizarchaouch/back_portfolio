@@ -1,7 +1,6 @@
 const authController = require("../middleware/authController");
-const recruModel = require("../models/recruteur");
+const recruModel = require("../models/user");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
@@ -40,6 +39,7 @@ const signup = async (req, res) => {
       adress: data.adress,
       mail: data.mail,
       password: hashedPassword,
+      role: "recruteur",
     });
 
     await recruteur.save();
@@ -53,11 +53,11 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   const data = req.body;
-  return authController.authenticate(recruModel, data, "Recruteur", res);
+  return authController.authenticate(data, "Recruteur", res);
 };
 
 const getRec = async (req, res) => {
-  return authController.getUser(recruModel, req, res);
+  return authController.getUser(req, res);
 };
 
 const logout = (req, res) => {
