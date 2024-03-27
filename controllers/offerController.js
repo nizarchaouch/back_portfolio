@@ -10,6 +10,7 @@ const add = async (req, res) => {
   try {
     const offer = new offerModel({
       idRec: data.idRec,
+      image: data.image,
       nomEntreprise: data.nomEntreprise,
       titre: data.titre,
       position: data.position,
@@ -24,9 +25,8 @@ const add = async (req, res) => {
       date_expiration: data.date_expiration,
       motCle: data.motCle,
     });
-
     await offer.save();
-    return res.status(201).json({ message: "réussie" });
+    return res.status(201).json({ message: offer });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: ERROR_MESSAGES.UNABLE_TO_ADD });

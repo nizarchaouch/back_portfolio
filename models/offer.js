@@ -5,6 +5,10 @@ const offerSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  image: {
+    type: String,
+    require: true,
+  },
   nomEntreprise: {
     type: String,
     require: true,
