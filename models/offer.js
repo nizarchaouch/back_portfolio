@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const offerSchema = new mongoose.Schema({
+  idRec: {
+    type: String,
+    require: true,
+  },
   nomEntreprise: {
     type: String,
     require: true,
