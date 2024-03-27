@@ -61,4 +61,20 @@ const update = async (req, res) => {
   }
 };
 
-module.exports = { add, show, update };
+const deleteOffer = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const offer = await offerModel.findByIdAndDelete(id);
+  
+      if (!offer) {
+        return res.status(404).json({ message: ERROR_MESSAGES.OFFER_NOT_FOUND });
+      }
+  
+      res.status(200).json({ message: "Supprimé" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+    }
+  };
+
+module.exports = { add, show, update, deleteOffer };

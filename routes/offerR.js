@@ -8,4 +8,6 @@ router.put("/update/:id", offerController.update);
 
 router.get("/show/:id", offerController.show);
 
+router.delete("/delete/:id", offerController.deleteOffer);
+
 module.exports = router;
