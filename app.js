@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 const candRouter = require("./routes/candidat");
 const recruRouter = require("./routes/recruteurR");
+const offerRouter = require("./routes/offerR")
 
 app.use(
   cors({
@@ -35,7 +36,7 @@ const database = (module.exports = () => {
 database();
 
 app.use("/api/user", candRouter, recruRouter);
-// app.use("/api/recruteur", recruRouter);
+app.use("/api/offer", offerRouter);
 
 app.listen(8000, () => {
   console.log("server on port 8000");
