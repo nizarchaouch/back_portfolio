@@ -26,7 +26,7 @@ const add = async (req, res) => {
     });
 
     await offer.save();
-    return res.status(201).json({ mesaage: "réussie" });
+    return res.status(201).json({ message: "réussie" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: ERROR_MESSAGES.UNABLE_TO_ADD });
@@ -35,7 +35,8 @@ const add = async (req, res) => {
 
 const show = async (req, res) => {
   try {
-    const offers = await offerModel.find({});
+    const id = req.params.id;
+    const offers = await offerModel.find({ idRec: id }, {});
     res.json(offers);
   } catch (error) {
     console.log(error);
@@ -45,4 +46,19 @@ const show = async (req, res) => {
   }
 };
 
-module.exports = { add, show };
+const update = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const offer = await offerModel.findByIdAndUpdate(id, req.body);
+    if (!offer) {
+      return res.status(404).json({ message: ERROR_MESSAGES.OFFER_NOT_FOUND });
+    }
+    res.status(200).json({ message: "update" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+  }
+};
+
+module.exports = { add, show, update };
