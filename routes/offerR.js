@@ -6,7 +6,8 @@ router.post("/add", offerController.add);
 
 router.put("/update/:id", offerController.update);
 
-router.get("/show/:id", offerController.show);
+router.get("/showOffer", offerController.show);
+router.get("/show/:id", offerController.showRec);
 
 router.delete("/delete/:id", offerController.deleteOffer);
 
