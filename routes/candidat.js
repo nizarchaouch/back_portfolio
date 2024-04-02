@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const candContoller = require("../controllers/candController");
+const candController = require("../controllers/candController");
 
-router.post("/signup", candContoller.signup);
-router.post("/login", candContoller.login);
-router.post("/logout", candContoller.logout);
+router.post("/signup", candController.signup);
+router.post("/login", candController.login);
+router.post("/logout", candController.logout);
 
-router.put("/update/:id", candContoller.updateCand);
+router.put("/update/:id", candController.updateCand);
 
-router.get("/", candContoller.getCand);
+router.get("/", candController.getCand);
 
 module.exports = router;
