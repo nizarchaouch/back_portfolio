@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  imageUrl: {
+  imagePath: {
     type: String,
     require: true,
+    default: "/defaultprofil.png",
   },
   nom: {
     type: String,
@@ -42,9 +43,9 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  role:{
-    type:String,
-    default:"candidat",
+  role: {
+    type: String,
+    default: "candidat",
   },
   urlfacebook: { type: String },
   urltwitter: { type: String },

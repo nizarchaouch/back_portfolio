@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const model = require("../models/user");
-const multer = require("multer");
+
+
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
@@ -78,27 +79,6 @@ const logout = (res) => {
   }
 };
 // upload image
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./public");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
 
-// const uploadFile = multer({ storage: storage });
-// const upload = (uploadFile.single("image"), async (req, res) => {
-//   try {
-//     if (req.file) {
-//       const imagepath = req.file.path.replace(/\\/g, "/").replace("public", "");
-//       res.json({ message: "ok!", imagepath: imagepath.replace("src/", "") });
-//     } else {
-//       res.json({ message: "file not upload" });
-//     }
-//   } catch (error) {
-//     res.json({ message: "error", error: er });
-//   }
-// });
 
 module.exports = { authenticate, getUser, logout };

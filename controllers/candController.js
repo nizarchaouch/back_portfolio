@@ -26,7 +26,7 @@ const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(data.password, salt);
 
     const candidat = new candModel({
-      imageUrl: data.imageUrl,
+      imagePath: data.imagePath,
       nom: data.nom,
       prenom: data.prenom,
       dateNais: data.dateNais,
