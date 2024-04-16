@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const candRouter = require("./routes/candidat");
 const recruRouter = require("./routes/recruteurR");
 const offerRouter = require("./routes/offerR");
+const CandOfferRouter = require("./routes/candOfferR");
 
 app.use(
   cors({
@@ -21,7 +22,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static("public"))
+app.use(express.static("public"));
 
 const database = (module.exports = () => {
   const connectionParams = {
@@ -41,6 +42,7 @@ database();
 
 app.use("/api/user", candRouter, recruRouter);
 app.use("/api/offer", offerRouter);
+app.use("/api/candidature", CandOfferRouter);
 
 // upload image
 

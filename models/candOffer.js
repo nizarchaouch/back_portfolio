@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const CandSchema = new mongoose.Schema({
+const candSchema = new mongoose.Schema({
   idCandidat: {
     type: String,
     require: true,
@@ -15,4 +15,4 @@ const CandSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("candidature", CandSchema);
+module.exports = mongoose.model("candidature", candSchema);
