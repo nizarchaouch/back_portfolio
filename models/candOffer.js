@@ -13,6 +13,11 @@ const candSchema = new mongoose.Schema({
     type: Date,
     require: true,
   },
+  etat: {
+    type: String,
+    require: true,
+    default: "attend",
+  },
 });
 
 module.exports = mongoose.model("candidature", candSchema);
