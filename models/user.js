@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  cv: {
+  cvPath: {
     type: String,
     require: true,
   },

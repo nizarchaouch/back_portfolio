@@ -68,6 +68,18 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     res.json({ message: "error", error });
   }
 });
+app.post("/uploadCv", upload.single("file"), async (req, res) => {
+  try {
+    if (req.file) {
+      const cvpath = req.file.path.replace(/\\/g, "/").replace("public", "");
+      res.json({ message: "ok!", cvpath: cvpath.replace("src/", "") });
+    } else {
+      res.json({ message: "file not upload" });
+    }
+  } catch (error) {
+    res.json({ message: "error", error });
+  }
+});
 
 app.listen(8000, () => {
   console.log("server on port 8000");
