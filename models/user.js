@@ -39,6 +39,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  titre_emploi: {
+    type: String,
+    require: true,
+  },
+  cv: {
+    type: String,
+    require: true,
+  },
   verifier: {
     type: Boolean,
     default: false,
