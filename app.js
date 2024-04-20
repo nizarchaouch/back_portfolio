@@ -44,7 +44,7 @@ app.use("/api/user", candRouter, recruRouter);
 app.use("/api/offer", offerRouter);
 app.use("/api/candidature", CandOfferRouter);
 
-// upload image
+// upload image & file
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
