@@ -20,4 +20,16 @@ const add = async (req, res) => {
   }
 };
 
-module.exports = { add };
+const showCandOffer = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const candOffer = await candModel.find({ idCandidat: id }, {});
+    res.status(200).json(candOffer);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+  }
+};
+module.exports = { add, showCandOffer };

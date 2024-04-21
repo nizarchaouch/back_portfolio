@@ -16,7 +16,7 @@ const candSchema = new mongoose.Schema({
   etat: {
     type: String,
     require: true,
-    default: "attend",
+    default: "en attend",
   },
 });
 
