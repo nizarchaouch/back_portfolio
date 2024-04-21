@@ -54,21 +54,32 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
+// storage de cv
+const storageCv = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
 
 const upload = multer({ storage: storage });
+const uploadCV=multer({storage:storageCv});
+
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
     if (req.file) {
       const imagepath = req.file.path.replace(/\\/g, "/").replace("public", "");
       res.json({ message: "ok!", imagepath: imagepath.replace("src/", "") });
     } else {
-      res.json({ message: "file not upload" });
+      res.json({ message: "Image not upload" });
     }
   } catch (error) {
     res.json({ message: "error", error });
   }
 });
-app.post("/uploadCv", upload.single("file"), async (req, res) => {
+app.post("/uploadCv", uploadCV.single("file"), async (req, res) => {
   try {
     if (req.file) {
       const cvpath = req.file.path.replace(/\\/g, "/").replace("public", "");
