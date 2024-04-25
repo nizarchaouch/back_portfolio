@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const model = require("../models/user");
 
-
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
@@ -18,6 +17,10 @@ const authenticate = async (data, role, res) => {
 
     if (!(await bcrypt.compare(data.password, user.password))) {
       return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    if (!user.verifier) {
+      return res.status(401).json({ message: "Vérifier mail" });
     }
 
     const userWithoutPassword = user.toJSON();
@@ -54,7 +57,10 @@ const getUser = async (req, res) => {
     const user = await model.findOne({ _id: claims._id });
 
     if (!user) {
-      return res.status(401).json({ message: "User not found" });
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (!user.verifier) {
+      return res.status(401).json({ message: "Email non vérifié" });
     }
 
     // const userWithoutPassword = user.toJSON();
@@ -79,6 +85,5 @@ const logout = (res) => {
   }
 };
 // upload image
-
 
 module.exports = { authenticate, getUser, logout };
