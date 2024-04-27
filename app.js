@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 
@@ -30,7 +32,7 @@ const database = (module.exports = () => {
     useUnifiedTopology: true,
   };
   try {
-    mongoose.connect("mongodb://127.0.0.1:27017/portfolio");
+    mongoose.connect(process.env.DB_URI);
     console.log("Database connected succesfully");
   } catch (error) {
     console.log(error);
@@ -92,6 +94,6 @@ app.post("/uploadCv", uploadCV.single("file"), async (req, res) => {
   }
 });
 
-app.listen(8000, () => {
-  console.log("server on port 8000");
+app.listen(process.env.PORT, () => {
+  console.log(`server on port: ${process.env.PORT}`);
 });
