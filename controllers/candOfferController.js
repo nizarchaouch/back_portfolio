@@ -1,4 +1,6 @@
 const candModel = require("../models/candOffer");
+const offerModel = require("../models/offer");
+
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
@@ -23,8 +25,25 @@ const add = async (req, res) => {
 const showCandOffer = async (req, res) => {
   try {
     const id = req.params.id;
-    const candOffer = await candModel.find({ idCandidat: id }, {});
-    res.status(200).json(candOffer);
+    const candOffers = await candModel.find({ idCandidat: id });
+
+    if (!candOffers.length) {
+      return res
+        .status(404)
+        .json({ message: "Aucune offre trouvée pour ce candidat." });
+    }
+
+    const offerIds = candOffers.map((offer) => offer.idOffer);
+
+    const infOffers = [];
+
+    // Boucle sur chaque idOffer et récupère les informations sur l'offre correspondante
+    for (const offerId of offerIds) {
+      const infOffer = await offerModel.findOne({ _id: offerId });
+      infOffers.push(infOffer);
+    }
+
+    res.status(200).json({ candOffers, infOffers });
   } catch (error) {
     console.log(error);
     return res
