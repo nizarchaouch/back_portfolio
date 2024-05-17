@@ -67,7 +67,7 @@ const storageCv = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-const uploadCV=multer({storage:storageCv});
+const uploadCV = multer({ storage: storageCv });
 
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
