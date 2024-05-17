@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const model = require("../models/user");
-require('dotenv').config();
+require("dotenv").config();
 
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
@@ -28,7 +28,10 @@ const authenticate = async (data, role, res) => {
     delete userWithoutPassword.password;
 
     //jwt
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { _id: user._id },
+      process.env.JWT_SECRET || "hellojwt"
+    );
 
     res.cookie("jwt", token, {
       httpOnly: true,
@@ -46,7 +49,7 @@ const authenticate = async (data, role, res) => {
 
 const getUser = async (req, res) => {
   try {
-    const secretKey = process.env.JWT_SECRET;
+    const secretKey = process.env.JWT_SECRET || "hellojwt";
 
     const cookie = req.cookies["jwt"];
     const claims = jwt.verify(cookie, secretKey);
