@@ -10,18 +10,19 @@ const add = async (req, res) => {
   try {
     const offer = new offerModel({
       idRec: data.idRec,
-      image: data.image,
-      nomEntreprise: data.nomEntreprise,
+      // image: data.image,
+      // nomEntreprise: data.nomEntreprise,
       titre: data.titre,
-      position: data.position,
+      salaire: data.salaire,
       vacants: data.vacants,
       typeOffer: data.typeOffer,
       experience: data.experience,
       niveauCand: data.niveauCand,
       langue: data.langue,
+      genre: data.genre,
       description: data.description,
       exigence: data.exigence,
-      date_creation: data.date_creation,
+      date_creation: new Date(),
       date_expiration: data.date_expiration,
       motCle: data.motCle,
     });
