@@ -13,7 +13,7 @@ const add = async (req, res) => {
       idRec: data.idRec,
       logo: data.logo,
       nomEntreprise: data.nomEntreprise,
-      postion: data.postion,
+      position: data.position,
       titre: data.titre,
       salaire: data.salaire,
       vacants: data.vacants,
@@ -38,7 +38,6 @@ const add = async (req, res) => {
 const show = async (req, res) => {
   try {
     const offers = await offerModel.find({});
-    const getRecInfo = await RecModel.findById(offers.idRec);
     res.status(200).json(offers);
   } catch (error) {
     console.log(error);

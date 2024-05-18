@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["candidat", "recruteur","admin"],
+    enum: ["candidat", "recruteur", "admin"],
     default: "candidat",
   },
   urlfacebook: { type: String },
@@ -62,6 +62,10 @@ const userSchema = new mongoose.Schema({
   urllinkedin: { type: String },
   // recruteur
   nomEntreprise: {
+    type: String,
+    require: true,
+  },
+  logo: {
     type: String,
     require: true,
   },
