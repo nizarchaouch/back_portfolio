@@ -5,11 +5,15 @@ const offerSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  image: {
+  logo: {
     type: String,
     require: true,
   },
   nomEntreprise: {
+    type: String,
+    require: true,
+  },
+  postion: {
     type: String,
     require: true,
   },
@@ -19,7 +23,6 @@ const offerSchema = new mongoose.Schema({
   },
   salaire: {
     type: String,
-    require: true,
   },
   vacants: {
     type: Number,
@@ -38,20 +41,17 @@ const offerSchema = new mongoose.Schema({
       "Saisonnier",
       "Freelance / Indépendant",
       "Temps partiel",
-      "Stage"
+      "Stage",
     ],
   },
   experience: {
     type: String,
-    require: true,
   },
   niveauCand: {
     type: String,
-    require: true,
   },
   langue: {
     type: String,
-    require: true,
   },
   genre: {
     type: String,

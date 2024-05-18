@@ -1,4 +1,5 @@
 const offerModel = require("../models/offer");
+const RecModel = require("../models/user");
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
@@ -10,8 +11,9 @@ const add = async (req, res) => {
   try {
     const offer = new offerModel({
       idRec: data.idRec,
-      // image: data.image,
-      // nomEntreprise: data.nomEntreprise,
+      logo: data.logo,
+      nomEntreprise: data.nomEntreprise,
+      postion: data.postion,
       titre: data.titre,
       salaire: data.salaire,
       vacants: data.vacants,
@@ -36,6 +38,7 @@ const add = async (req, res) => {
 const show = async (req, res) => {
   try {
     const offers = await offerModel.find({});
+    const getRecInfo = await RecModel.findById(offers.idRec);
     res.status(200).json(offers);
   } catch (error) {
     console.log(error);
