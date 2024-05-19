@@ -35,7 +35,7 @@ const add = async (req, res) => {
     return res.status(500).json({ message: ERROR_MESSAGES.UNABLE_TO_ADD });
   }
 };
-const show = async (req, res) => {
+const showAll = async (req, res) => {
   try {
     const offers = await offerModel.find({});
     res.status(200).json(offers);
@@ -93,4 +93,4 @@ const deleteOffer = async (req, res) => {
   }
 };
 
-module.exports = { add, show, showRec, update, deleteOffer };
+module.exports = { add, showAll, showRec, update, deleteOffer };
