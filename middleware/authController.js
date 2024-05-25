@@ -1,11 +1,15 @@
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const model = require("../models/user");
-require("dotenv").config();
 
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
+  INVALID_CREDENTIALS: "Invalid credentials",
+  UNAUTHENTICATED: "Unauthenticated",
+  USER_NOT_FOUND: "User not found",
+  EMAIL_NOT_VERIFIED: "Email not verified",
 };
 
 const authenticate = async (data, role, res) => {
@@ -16,18 +20,19 @@ const authenticate = async (data, role, res) => {
       return res.status(404).json({ message: `${role} not found` });
     }
 
-    if (!(await bcrypt.compare(data.password, user.password))) {
-      return res.status(400).json({ message: "Invalid credentials" });
+    const isPasswordValid = await bcrypt.compare(data.password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: ERROR_MESSAGES.INVALID_CREDENTIALS });
     }
 
     if (!user.verifier) {
-      return res.status(401).json({ message: "Vérifier mail" });
+      return res.status(401).json({ message: ERROR_MESSAGES.EMAIL_NOT_VERIFIED });
     }
 
     const userWithoutPassword = user.toJSON();
     delete userWithoutPassword.password;
 
-    //jwt
+    // Generate JWT
     const token = jwt.sign(
       { _id: user._id },
       process.env.JWT_SECRET || "hellojwt"
@@ -55,16 +60,16 @@ const getUser = async (req, res) => {
     const claims = jwt.verify(cookie, secretKey);
 
     if (!claims) {
-      return res.status(401).json({ message: "Unauthenticated" });
+      return res.status(401).json({ message: ERROR_MESSAGES.UNAUTHENTICATED });
     }
 
     const user = await model.findOne({ _id: claims._id });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: ERROR_MESSAGES.USER_NOT_FOUND });
     }
     if (!user.verifier) {
-      return res.status(401).json({ message: "Email non vérifié" });
+      return res.status(401).json({message: ERROR_MESSAGES.EMAIL_NOT_VERIFIED });
     }
 
     // const userWithoutPassword = user.toJSON();
@@ -85,9 +90,8 @@ const logout = (res) => {
     res.status(200).json({ message: "Déconnexion réussie" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Erreur interne du serveur" });
+    res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
   }
 };
-// upload image
 
 module.exports = { authenticate, getUser, logout };
