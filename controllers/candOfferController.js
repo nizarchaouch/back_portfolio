@@ -51,4 +51,26 @@ const showCandOffer = async (req, res) => {
       .json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
   }
 };
-module.exports = { add, showCandOffer };
+
+const countApp = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const offers = await candModel.find({ idOffer: id });
+
+    if (!offers.length) {
+      return res
+        .status(404)
+        .json({ message: "Aucune candidateur trouvée pour ce offer." });
+    }
+
+    const count = offers.length;
+
+    res.status(200).json({ count });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
+  }
+};
+module.exports = { add, showCandOffer, countApp };
