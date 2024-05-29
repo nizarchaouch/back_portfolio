@@ -26,7 +26,6 @@ const add = async (req, res) => {
       exigence: data.exigence,
       date_creation: new Date(),
       date_expiration: data.date_expiration,
-      motCle: data.motCle,
     });
     await offer.save();
     return res.status(201).json({ message: offer });

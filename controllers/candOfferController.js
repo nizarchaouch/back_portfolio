@@ -1,5 +1,6 @@
 const candModel = require("../models/candOffer");
 const offerModel = require("../models/offer");
+const userModel = require("../models/user");
 
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
@@ -9,6 +10,16 @@ const ERROR_MESSAGES = {
 
 const add = async (req, res) => {
   const data = req.body;
+
+  const existing = await candModel.findOne({
+    idCandidat: data.idCandidat,
+    idOffer: data.idOffer,
+  });
+
+  if (existing) {
+    return res.status(409).json({ message: "Candidature already exists" });
+  }
+
   try {
     const candoffer = new candModel({
       idCandidat: data.idCandidat,
@@ -52,20 +63,22 @@ const showCandOffer = async (req, res) => {
   }
 };
 
-const countApp = async (req, res) => {
+const showOfferApp = async (req, res) => {
   try {
     const id = req.params.id;
-    const offers = await candModel.find({ idOffer: id });
+    const candOffers = await candModel.find({ idOffer: id });
 
-    if (!offers.length) {
-      return res
-        .status(404)
-        .json({ message: "Aucune candidateur trouvée pour ce offer." });
+    const CandIds = candOffers.map((candidat) => candidat.idCandidat);
+
+    const infoCands = [];
+
+    // Boucle sur chaque idOffer et récupère les informations sur l'offre correspondante
+    for (const CandId of CandIds) {
+      const infoCand = await userModel.findOne({ _id: CandId });
+      infoCands.push(infoCand);
     }
 
-    const count = offers.length;
-
-    res.status(200).json({ count });
+    res.status(200).json({ candOffers, infoCands });
   } catch (error) {
     console.log(error);
     return res
@@ -73,4 +86,5 @@ const countApp = async (req, res) => {
       .json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
   }
 };
-module.exports = { add, showCandOffer, countApp };
+
+module.exports = { add, showCandOffer, showOfferApp };

@@ -72,10 +72,6 @@ const offerSchema = new mongoose.Schema({
     type: Date,
     require: true,
   },
-  motCle: {
-    type: Array,
-    require: true,
-  },
 });
 
 module.exports = mongoose.model("offer", offerSchema);
