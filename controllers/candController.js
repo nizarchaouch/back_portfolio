@@ -1,4 +1,4 @@
-const authController = require("../middleware/authController");
+const authController = require("./userController");
 const candModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const nodemailer = require("nodemailer");

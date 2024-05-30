@@ -1,4 +1,4 @@
-const authController = require("../middleware/authController");
+const authController = require("./userController");
 const recruModel = require("../models/user");
 const bcrypt = require("bcryptjs");
 const ERROR_MESSAGES = {
