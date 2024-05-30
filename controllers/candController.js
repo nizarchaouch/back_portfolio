@@ -122,7 +122,7 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   const data = req.body;
-  return authController.authenticate(data, "Candidat", res);
+  authController.authenticate(data, "Candidat", res);
 };
 
 const getCand = async (req, res) => {
@@ -130,40 +130,11 @@ const getCand = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  return authController.logout(res);
+  authController.logout(res);
 };
 
 const updateCand = async (req, res) => {
-  try {
-    const id = req.params.id;
-
-    const newPassword = req.body.password;
-
-    if (newPassword) {
-      // Générer le sel et hacher le nouveau mot de passe
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(newPassword, salt);
-
-      // Mettre à jour le candidat avec le nouveau mot de passe haché
-      await candModel.findByIdAndUpdate(
-        id,
-        { password: hashedPassword },
-        { new: true } // Retourner le document mis à jour
-      );
-    } else {
-      // Si le mot de passe n'est pas modifié, mettre à jour les autres informations
-      const updateCand = await candModel.findByIdAndUpdate(id, req.body);
-      if (!updateCand) {
-        return res
-          .status(404)
-          .json({ message: ERROR_MESSAGES.CANDIDAT_NOT_FOUND });
-      }
-    }
-
-    res.status(201).json({ message: "Candidat mis à jour avec succès" });
-  } catch (error) {
-    res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
-  }
+  authController.updateUser(req, "candidat", res);
 };
 
 const verifCand = async (req, res) => {
