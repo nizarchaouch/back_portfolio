@@ -81,6 +81,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  fondee: {
+    type: Number,
+  },
+  taill_ent: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("user", userSchema);

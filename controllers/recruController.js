@@ -27,6 +27,7 @@ const signup = async (req, res) => {
 
     const recruteur = new recruModel({
       imageUrl: data.imageUrl,
+      logo: data.logo,
       nomEntreprise: data.nomEntreprise,
       description: data.description,
       identifiant: data.identifiant,
