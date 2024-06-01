@@ -46,8 +46,7 @@ app.use("/api/user", candRouter, recruRouter);
 app.use("/api/offer", offerRouter);
 app.use("/api/candidature", CandOfferRouter);
 
-// upload image & file
-
+// upload image
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./public");
@@ -74,6 +73,18 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     if (req.file) {
       const imagepath = req.file.path.replace(/\\/g, "/").replace("public", "");
       res.json({ message: "ok!", imagepath: imagepath.replace("src/", "") });
+    } else {
+      res.json({ message: "Image not upload" });
+    }
+  } catch (error) {
+    res.json({ message: "error", error });
+  }
+});
+app.post("/upload/logo", upload.single("logo"), async (req, res) => {
+  try {
+    if (req.file) {
+      const logopath = req.file.path.replace(/\\/g, "/").replace("public", "");
+      res.json({ message: "ok!", logopath: logopath.replace("src/", "") });
     } else {
       res.json({ message: "Image not upload" });
     }

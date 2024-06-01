@@ -65,7 +65,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  logo: {
+  logoPath: {
     type: String,
     require: true,
   },

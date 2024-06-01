@@ -54,15 +54,19 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   const data = req.body;
-  return authController.authenticate(data, "Recruteur", res);
+  authController.authenticate(data, "Recruteur", res);
 };
 
 const getRec = async (req, res) => {
-  return authController.getUser(req, res);
+  authController.getUser(req, res);
 };
 
 const logout = (req, res) => {
-  return authController.logout(res);
+  authController.logout(res);
 };
 
-module.exports = { signup, login, getRec, logout };
+const updateRec = async (req, res) => {
+  authController.updateUser(req, "Recruteur", res);
+};
+
+module.exports = { signup, login, getRec, logout, updateRec };
