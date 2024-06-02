@@ -60,6 +60,9 @@ const userSchema = new mongoose.Schema({
   urltwitter: { type: String },
   urlgithub: { type: String },
   urllinkedin: { type: String },
+  socialLinks: {
+    type: Array,
+  },
   // recruteur
   nomEntreprise: {
     type: String,

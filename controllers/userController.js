@@ -127,7 +127,7 @@ const updateUser = async (req, role, res) => {
       }
     }
 
-    res.status(201).json({ message: `${role} mis à jour avec succès` });
+    res.status(201).json({ message: `User mis à jour avec succès` });
   } catch (error) {
     res.status(500).json({ message: ERROR_MESSAGES.INTERNAL_SERVER_ERROR });
   }
