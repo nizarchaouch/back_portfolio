@@ -1,5 +1,4 @@
 const offerModel = require("../models/offer");
-const RecModel = require("../models/user");
 const ERROR_MESSAGES = {
   INTERNAL_SERVER_ERROR: "Internal Server Error",
   UNABLE_TO_ADD: "Unable to add",
