@@ -58,7 +58,7 @@ const showRec = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {
+const updateOffer = async (req, res) => {
   try {
     const id = req.params.id;
     const offer = await offerModel.findByIdAndUpdate(id, req.body);
@@ -91,4 +91,4 @@ const deleteOffer = async (req, res) => {
   }
 };
 
-module.exports = { add, showAll, showRec, update, deleteOffer };
+module.exports = { add, showAll, showRec, updateOffer, deleteOffer };

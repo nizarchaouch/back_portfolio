@@ -4,7 +4,7 @@ const offerController = require("../controllers/offerController");
 
 router.post("/add", offerController.add);
 
-router.put("/update/:id", offerController.update);
+router.put("/update/:id", offerController.updateOffer);
 
 router.get("/show/all", offerController.showAll);
 router.get("/show/:id", offerController.showRec);
