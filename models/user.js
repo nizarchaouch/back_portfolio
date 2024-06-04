@@ -56,10 +56,6 @@ const userSchema = new mongoose.Schema({
     enum: ["candidat", "recruteur", "admin"],
     default: "candidat",
   },
-  urlfacebook: { type: String },
-  urltwitter: { type: String },
-  urlgithub: { type: String },
-  urllinkedin: { type: String },
   socialLinks: {
     type: Array,
   },
