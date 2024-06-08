@@ -60,6 +60,21 @@ const login = async (req, res) => {
 const getRec = async (req, res) => {
   authController.getUser(req, res);
 };
+const getRecInfo = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const infoRec = await recruModel.findById(id);
+
+    if (!infoRec) {
+      return res.status(404).json({ message: "Rec not found" });
+    }
+
+    res.status(200).json(infoRec);
+  } catch (error) {
+    console.error("Error retrieving rec info:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 const logout = (req, res) => {
   authController.logout(res);
@@ -69,4 +84,4 @@ const updateRec = async (req, res) => {
   authController.updateUser(req, "Recruteur", res);
 };
 
-module.exports = { signup, login, getRec, logout, updateRec };
+module.exports = { signup, login, getRec, getRecInfo, logout, updateRec };

@@ -8,6 +8,6 @@ router.post("/logout", recruController.logout);
 
 router.put("/update/:id", recruController.updateRec);
 
-
+router.get("/RecInfo/:id", recruController.getRecInfo);
 
 module.exports = router;
