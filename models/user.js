@@ -86,6 +86,7 @@ const userSchema = new mongoose.Schema({
   taill_ent: {
     type: String,
   },
+  resetToken: { type: String },
 });
 
 module.exports = mongoose.model("user", userSchema);

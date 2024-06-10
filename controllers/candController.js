@@ -43,12 +43,12 @@ const signup = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "nizar.chaouch@polytechnicien.tn",
-        pass: "rpft gvgn crpp rtpa",
+        user: process.env.MY_MAIL,
+        pass: process.env.MY_PASSWORD,
       },
     });
     const mailOptions = {
-      from: "nizar.chaouch@polytechnicien.tn",
+      from: "nizar@gmail.com",
       to: data.mail,
       subject: "Vérification d'email",
       html: `<!DOCTYPE html>
